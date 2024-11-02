@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Invoice</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid black;
+        }
+        td, th {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        .header-table {
+            width: 100%;
+        }
+        .header-cell {
+            width: 50%;
+            vertical-align: top;
+        }
+        .item-table {
+            width: 100%;
+            margin-top: 0px;
+        }
+        .item-table th, .item-table td {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<table class="header-table">
+    <tr>
+        <td class="header-cell">
+            <strong>Seller:</strong><br />
+            <span th:text="${invoice.seller}">[Seller Name]</span><br />
+            <span th:text="${invoice.sellerAddress}">[Seller Address]</span><br />
+            GSTIN: <span th:text="${invoice.sellerGstin}">[Seller GSTIN]</span>
+        </td>
+        <td class="header-cell">
+            <strong>Buyer:</strong><br />
+            <span th:text="${invoice.buyer}">[Buyer Name]</span><br />
+            <span th:text="${invoice.buyerAddress}">[Buyer Address]</span><br />
+            GSTIN: <span th:text="${invoice.buyerGstin}">[Buyer GSTIN]</span>
+        </td>
+    </tr>
+</table>
+
+<table class="item-table">
+    <tr>
+        <th>Item</th>
+        <th>Quantity</th>
+        <th>Rate</th>
+        <th>Amount</th>
+    </tr>
+    <tr th:each="item : ${invoice.items}">
+        <td th:text="${item.name}">[Item Name]</td>
+        <td th:text="${item.quantity}">[Quantity]</td>
+        <td th:text="${item.rate}">[Rate]</td>
+        <td th:text="${item.amount}">[Amount]</td>
+    </tr>
+</table>
+
+</body>
+</html>
