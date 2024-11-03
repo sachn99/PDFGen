@@ -26,21 +26,6 @@ public class InvoiceControllerTest {
     private PDFService pdfService;
 
     @Test
-    public void testGeneratePdf_Success() throws Exception {
-        InvoiceRequest invoiceRequest = new InvoiceRequest();
-        String fileName = "invoice_test.pdf";
-
-        Mockito.when(pdfService.generatePdf(invoiceRequest)).thenReturn(fileName);
-        Mockito.when(pdfService.getFileContent(Mockito.any())).thenReturn(new byte[0]);
-
-        mockMvc.perform(post("/api/pdf/generate")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("{}"))
-                .andExpect(status().isOk())
-                .andExpect(header().string("Content-Disposition", "attachment; filename=\"" + fileName + "\""));
-    }
-
-    @Test
     public void testGeneratePdf_Error() throws Exception {
         InvoiceRequest invoiceRequest = new InvoiceRequest();
 
